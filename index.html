@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Message Board</title>
+  </head>
+  <body>
+    <div class="header">
+      <div class="thread-title">Thread Title</div>
+    </div>
+    <div class="container">
+      <div class="thread-container">
+        <ul class="thread"></ul>
+
+        <div class="reply-form-area">
+          <form class="reply-form" action="">
+            <textarea
+              class="reply-textarea"
+              name="message-body"
+              id=""
+              cols="30"
+              rows="4"
+              placeholder="Add message"
+            ></textarea>
+            <button class="reply-submit">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
