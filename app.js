@@ -30,12 +30,25 @@ const signupUser = async () => {
 
 const loginUser = async () => {
   const data = {
-    email: "bobby@gmail.com",
-    password: "propane",
+    email: "propane@gmail.com",
+    password: "bobby",
   };
   const res = await axios.post("http://localhost:3000/users/login", data);
 
   return res;
+};
+
+const triggerPasswordReset = async (email) => {
+  return await axios.post(`http://localhost:3000/users/password-reset`, {
+    email,
+  });
+};
+
+const resetPassword = async (token, newPassword) => {
+  return await axios.post(
+    `http://localhost:3000/users/password-reset/${token}`,
+    { password: newPassword }
+  );
 };
 
 const renderMessages = (msgs) => {
@@ -134,22 +147,30 @@ document.querySelector(".reply-submit").addEventListener("click", (e) => {
 });
 
 const init = () => {
-  signupUser()
-    .then((data) => console.log(data))
-    .catch((err) => console.log(err));
+  // signupUser()
+  //   .then((data) => console.log(data))
+  //   .catch((err) => console.log(err));
   // loginUser()
   //   .then((data) => {
   //     console.log(data);
   //   })
   //   .catch((err) => console.log(err));
-  // getMsgs()
-  //   .then((msgs) => {
-  //     console.log(msgs);
-  //     renderMessages(msgs);
-  //   })
-  //   .catch((err) => console.error(err));
+  getMsgs()
+    .then((msgs) => {
+      console.log(msgs);
+      renderMessages(msgs);
+    })
+    .catch((err) => console.error(err));
 
-  // const msgs = await getMsgs();
+  //  triggerPasswordReset("propane@gmail.com")
+  //    .then((data) => console.log(data))
+  //    .catch((err) => console.log(err));
+
+  // const token = "e143685f4faaf7464904b0403e0d187e3569e675e9631302ad";
+  // const newPassword = "345";
+  // resetPassword(token, newPassword)
+  //   .then((data) => console.log(data))
+  //   .catch((error) => console.log(error));
 
   // Get thread title on init
   const threadTitle = getTitle();
