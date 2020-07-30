@@ -2,19 +2,19 @@ axios.defaults.crossDomain = true;
 axios.defaults.withCredentials = true;
 
 const getMsgs = async () => {
-  const res = await fetch("http://localhost:3000/threads");
+  const response = await axios.get("http://localhost:3000/threads");
+  // Response is an object with data nested
+  const msgs = response.data;
 
-  const msgs = await res.json();
-  // console.log(msgs);
   return msgs;
 };
 
 const signupUser = async () => {
   const data = {
     username: "hankhill",
-    email: "bobby@gmail.com",
-    password: "propane",
-    avatarUrl: "https://picsum.photos/10",
+    email: "propane@gmail.com",
+    password: "bobby",
+    avatarUrl: "https://picsum.photos/31",
   };
 
   const res = await fetch("http://localhost:3000/users/create", {
@@ -30,8 +30,8 @@ const signupUser = async () => {
 
 const loginUser = async () => {
   const data = {
-    email: "webs@gmail.com",
-    password: "cryptonite",
+    email: "bobby@gmail.com",
+    password: "propane",
   };
   const res = await axios.post("http://localhost:3000/users/login", data);
 
@@ -134,13 +134,22 @@ document.querySelector(".reply-submit").addEventListener("click", (e) => {
 });
 
 const init = () => {
-  // signupUser().then((data) => console.log(data));
-  loginUser().then((data) => {
-    console.log(data);
-  });
-  getMsgs().then((msgs) => {
-    renderMessages(msgs);
-  });
+  signupUser()
+    .then((data) => console.log(data))
+    .catch((err) => console.log(err));
+  // loginUser()
+  //   .then((data) => {
+  //     console.log(data);
+  //   })
+  //   .catch((err) => console.log(err));
+  // getMsgs()
+  //   .then((msgs) => {
+  //     console.log(msgs);
+  //     renderMessages(msgs);
+  //   })
+  //   .catch((err) => console.error(err));
+
+  // const msgs = await getMsgs();
 
   // Get thread title on init
   const threadTitle = getTitle();
